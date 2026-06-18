@@ -1,0 +1,2775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png"/>
+<link rel="apple-touch-icon" href="favicon-192.png"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Good Vets — Preventive Pet Healthcare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --sage: #8FA68E;
+    --sage-dark: #6b8a6a;
+    --sage-light: #c4d4c3;
+    --sage-xlight: #edf4ed;
+    --mint: #E8F4F8;
+    --gold: #D4A574;
+    --gold-dark: #b8885a;
+    --white: #ffffff;
+    --offwhite: #fafaf8;
+    --text-dark: #1e2a1e;
+    --text-mid: #4a5a4a;
+    --text-muted: #7a8c7a;
+    --border: rgba(143,166,142,0.2);
+    --shadow: 0 4px 24px rgba(30,42,30,0.08);
+    --shadow-lg: 0 12px 48px rgba(30,42,30,0.14);
+    --radius: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    background: var(--offwhite);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────────── */
+  /* ══════════════════════════════
+     NAV — REDESIGNED
+     ══════════════════════════════ */
+  /* ══ PREMIUM STICKY HEADER ══ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: 68px;
+    /* Semi-transparent white with stronger blur for premium feel */
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    /* Thin, subtle bottom border — healthcare precision */
+    border-bottom: 1px solid rgba(143,166,142,0.15);
+    padding: 0 5%;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 0;
+    /* Smooth all transitions */
+    transition:
+      background 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease,
+      height 0.35s ease,
+      z-index 0.38s ease;
+    will-change: background, box-shadow;
+  }
+  nav.menu-open {
+    z-index: 998 !important;
+  }
+  /* On scroll: more opaque, stronger shadow, hairline border */
+  nav.scrolled {
+    background: rgba(255,255,255,0.97);
+    border-bottom-color: rgba(143,166,142,0.22);
+    box-shadow:
+      0 1px 0 rgba(143,166,142,0.12),
+      0 4px 16px rgba(30,42,30,0.06),
+      0 8px 32px rgba(30,42,30,0.04);
+  }
+
+  /* ── Logo ── */
+  .nav-logo {
+    display: flex; align-items: center; gap: 11px;
+    text-decoration: none; flex-shrink: 0;
+  }
+  .nav-logo img {
+    width: 44px; height: 44px; border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid var(--sage-light);
+    box-shadow: 0 2px 10px rgba(143,166,142,0.25);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    flex-shrink: 0;
+  }
+  .nav-logo:hover img { transform: scale(1.06); box-shadow: 0 4px 16px rgba(143,166,142,0.4); }
+  .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+  .nav-logo-text span:first-child {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 17px !important; font-weight: 800 !important;
+    color: var(--sage-dark) !important; letter-spacing: -0.03em !important; line-height: 1 !important;
+  }
+  .nav-logo-text span:last-child {
+    font-size: 8.5px !important; font-weight: 700 !important;
+    color: var(--text-mid) !important; letter-spacing: 0.2em !important;
+    text-transform: uppercase !important; opacity: 0.75 !important;
+  }
+
+  /* ── Nav links — center cluster ── */
+  .nav-links {
+    display: flex; align-items: center;
+    gap: 4px; /* tight gap, padding handles spacing */
+    list-style: none;
+    position: absolute; left: 50%; transform: translateX(-50%);
+  }
+  .nav-links a.nav-item {
+    text-decoration: none;
+    font-size: 13px; font-weight: 600;
+    color: var(--text-mid);
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: color 0.2s ease, background 0.2s ease;
+    position: relative; white-space: nowrap;
+  }
+  /* Underline indicator */
+  .nav-links a.nav-item::after {
+    content: ''; position: absolute;
+    bottom: 2px; left: 12px; right: 12px;
+    height: 1.5px; background: var(--sage-dark);
+    border-radius: 1px;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  .nav-links a.nav-item:hover {
+    color: var(--sage-dark);
+    background: var(--sage-xlight);
+  }
+  .nav-links a.nav-item:hover::after { transform: scaleX(1); }
+  /* Active state — JS will add .active class */
+  .nav-links a.nav-item.active {
+    color: var(--sage-dark); font-weight: 600;
+    background: var(--sage-xlight);
+  }
+  .nav-links a.nav-item.active::after { transform: scaleX(1); }
+
+  /* ─── HERO ────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--sage-xlight) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sage-xlight);
+    border: 1px solid var(--sage-light);
+    color: var(--sage-dark);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-badge::before {
+    content: '●'; font-size: 8px; color: var(--sage);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 4.5vw, 58px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--sage-dark);
+  }
+
+  .hero p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text-mid);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--sage-dark);
+    color: white;
+    padding: 15px 32px;
+    border-radius: 50px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .btn-primary:hover {
+    background: var(--sage);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(143,166,142,0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-mid);
+    padding: 15px 28px;
+    border-radius: 50px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--sage-light);
+    color: var(--sage-dark);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex; gap: 36px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-item { }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--sage-dark);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px; font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  .hero-visual {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  .hero-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border-radius: calc(var(--radius-xl) + 2px);
+    background: linear-gradient(135deg, var(--sage-light), var(--gold), var(--sage-light));
+    z-index: -1;
+    opacity: 0.4;
+  }
+
+  .hero-logo-big {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    display: block;
+    border: 3px solid var(--sage-light);
+    padding: 4px;
+    background: white;
+  }
+
+  .hero-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; text-align: center;
+    color: var(--text-dark); margin-bottom: 8px;
+  }
+
+  .hero-card .tagline {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--gold-dark); text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .feature-list {
+    list-style: none; display: flex; flex-direction: column; gap: 14px;
+  }
+
+  .feature-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; color: var(--text-mid); line-height: 1.5;
+  }
+
+  .feature-list li::before {
+    content: '✓';
+    width: 22px; height: 22px;
+    background: var(--sage-xlight);
+    color: var(--sage-dark);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ─── SECTION SHARED ──────────────────────── */
+  section { padding: 90px 5%; }
+
+  .section-label {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--sage-dark);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
+
+  .section-sub {
+    font-size: 16px; color: var(--text-mid);
+    line-height: 1.7; max-width: 540px;
+    margin-bottom: 48px;
+  }
+
+  /* ─── HOW IT WORKS ────────────────────────── */
+  .how {
+    background: var(--sage-xlight);
+    border-radius: 40px;
+    margin: 0 3%;
+    padding: 80px 6%;
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .step-card {
+    text-align: center;
+    position: relative;
+  }
+
+  .step-card::after {
+    content: '→';
+    position: absolute;
+    top: 28px; right: -20px;
+    color: var(--sage-light);
+    font-size: 20px;
+    display: block;
+  }
+
+  .step-card:last-child::after { display: none; }
+
+  .step-num {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--sage-dark); color: white;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 24px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 8px 24px rgba(107,138,106,0.35);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .step-card h4 {
+    font-size: 15px; font-weight: 600;
+    color: var(--text-dark); margin-bottom: 10px;
+  }
+
+  .step-card p {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6;
+  }
+
+  /* ─── SERVICES ────────────────────────────── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 0;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--sage-dark);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .service-icon {
+    font-size: 32px; margin-bottom: 16px;
+    display: block;
+  }
+
+  .service-card h4 {
+    font-size: 16px; font-weight: 600;
+    color: var(--text-dark); margin-bottom: 10px;
+  }
+
+  .service-card p {
+    font-size: 13px; color: var(--text-muted); line-height: 1.65;
+  }
+
+  /* ─── REGISTER FORM ───────────────────────── */
+  .register-section {
+    background: white;
+    border-radius: 40px;
+    margin: 0 3%;
+    padding: 80px 6%;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 16px;
+  }
+
+  .form-header { grid-column: 1 / -1; }
+
+  .form-group {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text-mid);
+  }
+
+  input, select, textarea {
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--text-dark);
+    background: var(--offwhite);
+    transition: border-color 0.2s, background 0.2s;
+    outline: none;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--sage-dark);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(143,166,142,0.12);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238FA68E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  textarea { resize: vertical; min-height: 80px; }
+
+  .form-note {
+    font-size: 12px; color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .form-submit-area {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 20px;
+    padding-top: 8px;
+  }
+
+  .form-submit-area p {
+    font-size: 12px; color: var(--text-muted); line-height: 1.5;
+  }
+
+  .form-submit-area a { color: var(--sage-dark); text-decoration: underline; }
+
+  /* Success message */
+  .success-msg {
+    display: none;
+    background: var(--sage-xlight);
+    border: 1px solid var(--sage-light);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+
+  .success-msg.show { display: block; }
+
+  .success-msg h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; color: var(--sage-dark);
+    margin-bottom: 10px;
+  }
+
+  .success-msg p { color: var(--text-mid); font-size: 15px; }
+
+  /* ─── TESTIMONIALS ────────────────────────── */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .testi-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    border: 1px solid var(--border);
+  }
+
+  .testi-stars {
+    color: var(--gold-dark);
+    font-size: 14px; margin-bottom: 14px;
+    letter-spacing: 2px;
+  }
+
+  .testi-card p {
+    font-size: 14px; color: var(--text-mid);
+    line-height: 1.7; margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testi-author {
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--sage-xlight);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600; color: var(--sage-dark);
+    flex-shrink: 0;
+  }
+
+  .testi-name {
+    font-size: 13px; font-weight: 600; color: var(--text-dark);
+    display: block;
+  }
+
+  .testi-pet {
+    font-size: 11px; color: var(--text-muted);
+  }
+
+  /* ─── FAQ ─────────────────────────────────── */
+  .faq-section { background: var(--offwhite); }
+
+  .faq-list {
+    max-width: 720px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  .faq-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .faq-q {
+    padding: 20px 24px;
+    font-size: 15px; font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .faq-q:hover { background: var(--sage-xlight); }
+
+  .faq-q .faq-icon {
+    font-size: 18px; color: var(--sage-dark);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-a {
+    padding: 0 24px;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s;
+    font-size: 14px; color: var(--text-mid); line-height: 1.75;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding: 4px 24px 20px;
+  }
+
+  /* ─── CONTACT BANNER ──────────────────────── */
+  .contact-banner {
+    background: var(--sage-dark);
+    border-radius: 40px;
+    margin: 0 3%;
+    padding: 64px 6%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .contact-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: white; margin-bottom: 12px;
+  }
+
+  .contact-banner p {
+    color: rgba(255,255,255,0.75);
+    font-size: 15px;
+  }
+
+  .contact-options {
+    display: flex; flex-direction: column; gap: 12px;
+    min-width: 220px;
+  }
+
+  .contact-item {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: white;
+    font-size: 14px; font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .contact-item:hover { background: rgba(255,255,255,0.18); }
+
+  .contact-item-icon {
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  /* ─── FOOTER ──────────────────────────────── */
+  footer {
+    background: var(--text-dark);
+    padding: 64px 5% 32px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 80px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand { }
+
+  .footer-logo {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo img {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 2px solid rgba(143,166,142,0.4);
+  }
+
+  .footer-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: white; font-weight: 700;
+  }
+
+  .footer-brand p {
+    font-size: 13px; line-height: 1.7; max-width: 240px;
+    margin-bottom: 20px;
+  }
+
+  .footer-tagline {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  .footer-col h5 {
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: white; margin-bottom: 20px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .footer-links a {
+    text-decoration: none; font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--sage-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px;
+  }
+
+  .footer-bottom-links {
+    display: flex; gap: 24px;
+  }
+
+  .footer-bottom-links a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .footer-bottom-links a:hover { color: var(--sage-light); }
+
+  /* ─── MODAL ───────────────────────────────── */
+  .modal-backdrop {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.55);
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-backdrop.active { display: flex; }
+
+  .modal {
+    background: white;
+    border-radius: var(--radius-xl);
+    max-width: 680px; width: 100%;
+    max-height: 80vh; overflow-y: auto;
+    padding: 48px;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--sage-xlight);
+    border: none; cursor: pointer;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 16px; color: var(--text-mid);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .modal h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--text-dark); margin-bottom: 20px;
+  }
+
+  .modal h3 {
+    font-size: 15px; font-weight: 600; color: var(--text-dark);
+    margin: 20px 0 8px;
+  }
+
+  .modal p {
+    font-size: 14px; color: var(--text-mid);
+    line-height: 1.75; margin-bottom: 10px;
+  }
+
+  .modal ul {
+    padding-left: 20px; font-size: 14px;
+    color: var(--text-mid); line-height: 2;
+  }
+
+  /* ─── LOADING SPINNER ─────────────────────── */
+  .spinner {
+    display: none;
+    width: 20px; height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── TOAST ───────────────────────────────── */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 3000;
+    background: var(--sage-dark); color: white;
+    padding: 16px 24px; border-radius: 12px;
+    font-size: 14px; font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.35s cubic-bezier(.34,1.56,.64,1);
+    max-width: 340px;
+  }
+
+  .toast.show {
+    transform: translateY(0); opacity: 1;
+  }
+
+
+  /* ─── PHOTO SECTIONS ─────────────────────── */
+  .photo-hero-wrap {
+    position: relative; border-radius: var(--radius-xl);
+    overflow: hidden; width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+  .photo-hero-wrap img {
+    width: 100%; height: 480px; object-fit: cover;
+    display: block;
+  }
+  .photo-hero-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 28px 28px 24px;
+    background: linear-gradient(to top, rgba(20,36,20,0.75) 0%, transparent 100%);
+  }
+  .photo-hero-overlay p {
+    color: white; font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .photo-hero-overlay span {
+    background: var(--sage-light); color: var(--sage-dark);
+    padding: 4px 10px; border-radius: 50px;
+    font-size: 11px; font-weight: 600;
+  }
+
+  .photo-strip {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .photo-strip-item {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-strip-item img {
+    width: 100%; height: 240px;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .photo-strip-item:hover img { transform: scale(1.04); }
+
+  .photo-strip-item .photo-label {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(255,255,255,0.92);
+    color: var(--text-dark);
+    padding: 6px 14px; border-radius: 50px;
+    font-size: 12px; font-weight: 600;
+  }
+
+  .photo-strip-item:first-child img { height: 240px; }
+
+  .about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    padding: 80px 5%;
+  }
+
+  .about-split img {
+    width: 100%; border-radius: var(--radius-xl);
+    object-fit: cover; height: 440px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (max-width: 900px) {
+    .photo-strip { grid-template-columns: 1fr 1fr; }
+    .about-split { grid-template-columns: 1fr; }
+    .about-split img { height: 280px; }
+    .photo-hero-wrap img { height: 320px; }
+  }
+
+  @media (max-width: 600px) {
+    .photo-strip { grid-template-columns: 1fr; }
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; }
+    .hero-visual { order: -1; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .step-card::after { display: none; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .contact-banner { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    nav .nav-links { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .how-grid, .services-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .modal { padding: 28px 24px; }
+  }
+
+  /* ══ PREMIUM ANIMATIONS ══ */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes slideRight{from{opacity:0;transform:translateX(-24px);}to{opacity:1;transform:translateX(0);}}
+  @keyframes floatUp{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  @keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+  @keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(143,166,142,0);}50%{box-shadow:0 0 24px 4px rgba(143,166,142,0.18);}}
+  @keyframes ripple{to{transform:scale(4);opacity:0;}}
+  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+  /* Scroll-reveal base */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1);}
+  .reveal-left.visible{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1);}
+  .reveal-right.visible{opacity:1;transform:translateX(0);}
+  .reveal-delay-1{transition-delay:0.1s;}
+  .reveal-delay-2{transition-delay:0.2s;}
+  .reveal-delay-3{transition-delay:0.3s;}
+  .reveal-delay-4{transition-delay:0.4s;}
+
+  /* Hero entrance */
+  .hero-content{animation:slideRight 0.9s cubic-bezier(0.4,0,0.2,1) both;}
+  .hero-visual{animation:fadeUp 0.9s cubic-bezier(0.4,0,0.2,1) 0.2s both;}
+  .hero-badge{animation:fadeIn 0.6s ease 0.1s both;}
+
+  /* Floating hero card */
+  .hero-card{animation:floatUp 6s ease-in-out infinite;}
+
+  /* Animated gradient hero background */
+  .hero::before{
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 20%, rgba(143,166,142,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(212,165,116,0.07) 0%, transparent 60%);
+    animation:gradientShift 15s ease infinite;background-size:300% 300%;
+  }
+
+  /* Card hover 3D tilt */
+  .service-card,.testi-card,.step-card{
+    transition:transform 0.35s cubic-bezier(0.4,0,0.2,1),box-shadow 0.35s ease !important;
+    transform-style:preserve-3d;will-change:transform;
+  }
+  .service-card:hover{transform:translateY(-6px) scale(1.01) !important;box-shadow:0 20px 48px rgba(30,42,30,0.12) !important;}
+
+  /* Testi card glassmorphism */
+  .testi-card{
+    background:rgba(255,255,255,0.8) !important;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.6) !important;
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+  }
+  .testi-card:hover{
+    transform:translateY(-6px) perspective(600px) rotateX(2deg) !important;
+    box-shadow:0 24px 52px rgba(30,42,30,0.13) !important;
+    background:rgba(255,255,255,0.95) !important;
+  }
+
+  /* Button ripple + premium */
+  .btn-primary,.btn-secondary,.nav-cta{position:relative;overflow:hidden;}
+  .btn-primary::after,.nav-cta::after{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at center,rgba(255,255,255,0.25) 0%,transparent 60%);
+    opacity:0;transition:opacity 0.3s;
+  }
+  .btn-primary:hover::after,.nav-cta:hover::after{opacity:1;}
+
+  /* Animated underline on stat numbers */
+  .stat-num{
+    background:linear-gradient(135deg,var(--sage-dark),var(--gold));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+
+  /* Shimmer on hero badge */
+  .hero-badge{
+    background:linear-gradient(90deg,var(--sage-xlight) 0%,rgba(196,212,195,0.6) 50%,var(--sage-xlight) 100%);
+    background-size:200% auto;animation:shimmer 3s linear infinite,fadeIn 0.6s ease 0.1s both;
+  }
+
+  /* Step number pulse */
+  .step-num{animation:glowPulse 3s ease-in-out infinite;}
+
+  /* Photo strip hover */
+  .photo-strip-item{transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
+  .photo-strip-item:hover{transform:scale(1.02) translateY(-4px);}
+
+  /* Smooth nav */
+
+  /* Ambient glow on contact banner */
+  .contact-banner{
+    background:linear-gradient(135deg,var(--sage-dark) 0%,#4a6b49 50%,var(--sage-dark) 100%) !important;
+    background-size:200% 200% !important;
+    animation:gradientShift 8s ease infinite;
+  }
+
+
+  /* Bricolage Grotesque for all major headings */
+  h1, h2, h3, .section-title, .hero h1, .stat-num {
+    font-family: 'Bricolage Grotesque', sans-serif !important;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 { font-weight: 800 !important; }
+  .section-title { font-weight: 800 !important; }
+
+  /* ── DOG TILE CARD ── */
+  .dog-tile-wrap {
+    position: relative;
+    display: inline-block;
+    border-radius: 24px;
+    overflow: visible;
+  }
+  .dog-tile-img {
+    width: 100%; max-width: 340px;
+    height: 400px; object-fit: cover;
+    border-radius: 24px;
+    display: block;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .dog-tile-wrap:hover .dog-tile-img { transform: scale(1.02); }
+  .notif-badge {
+    position: absolute;
+    background: white;
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 9px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+    animation: floatBadge 4s ease-in-out infinite;
+    z-index: 10; backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.6);
+    min-width: 180px;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  }
+  .notif-badge:hover {
+    transform: translateY(-4px) scale(1.04) !important;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.18) !important;
+    animation-play-state: paused;
+  }
+  .notif-badge.top-left { top: -16px; left: -20px; animation-delay: 0s; }
+  .notif-badge.bottom-right { bottom: -16px; right: -20px; animation-delay: 2s; }
+  @keyframes floatBadge {
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-6px);}
+  }
+  .notif-icon {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .notif-icon.green { background: #eef5ee; }
+  .notif-icon.sage { background: #4a7a56; }
+  .notif-text strong { display: block; font-size: 12px; font-weight: 700; color: #0d1f0d; line-height: 1.3; }
+  .notif-text span { font-size: 11px; color: #7a8c7a; }
+
+  /* ── HOW IT WORKS ANIMATED (Image 2) ── */
+  .how-step-animated {
+    text-align: center;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.2,0.64,1);
+  }
+  .how-step-animated.visible { opacity: 1; transform: translateY(0); }
+  .how-step-num {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--sage-dark); color: white;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 24px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 8px 24px rgba(107,138,106,0.35);
+    transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .how-step-animated:hover .how-step-num {
+    transform: scale(1.12) translateY(-4px);
+    box-shadow: 0 14px 32px rgba(107,138,106,0.45);
+  }
+  .how-step-animated h4 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
+  }
+
+  /* ── CONTACT BANNER ANIMATED (Image 3) ── */
+  .contact-item {
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+    position: relative; overflow: hidden;
+  }
+  .contact-item::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.08);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .contact-item:hover {
+    background: rgba(255,255,255,0.22) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+  }
+  .contact-item:hover::before { opacity: 1; }
+  .contact-item:active { transform: scale(0.97) !important; }
+  .contact-item-icon {
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .contact-item:hover .contact-item-icon { transform: scale(1.2) rotate(-5deg); }
+
+
+  /* ══ HOW IT WORKS — Image 2 style ══ */
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 8px;
+    align-items: start;
+    margin-top: 48px;
+  }
+  .how-arrow {
+    font-size: 22px; color: var(--sage-light);
+    display: flex; align-items: flex-start;
+    padding-top: 20px; justify-content: center;
+    animation: arrowPulse 2s ease-in-out infinite;
+  }
+  @keyframes arrowPulse {
+    0%,100%{transform:translateX(0);opacity:0.6;}
+    50%{transform:translateX(4px);opacity:1;}
+  }
+  .how-step-animated {
+    text-align: center;
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.2,0.64,1);
+    padding: 20px 12px;
+    border-radius: 20px;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.2,0.64,1), background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .how-step-animated.visible { opacity: 1; transform: translateY(0); }
+  .how-step-animated:hover {
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 8px 28px rgba(107,138,106,0.1);
+  }
+  .how-step-num {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--sage-dark); color: white;
+    font-family: 'Bricolage Grotesque', 'Poppins', sans-serif;
+    font-size: 24px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 8px 24px rgba(107,138,106,0.35);
+    transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .how-step-animated:hover .how-step-num {
+    transform: scale(1.14) translateY(-4px);
+    box-shadow: 0 16px 36px rgba(107,138,106,0.5);
+  }
+  .how-step-animated h4 {
+    font-size: 14px; font-weight: 700;
+    color: var(--text-dark); margin-bottom: 8px;
+  }
+  .how-step-animated p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ══ CONTACT BANNER — Image 3 style ══ */
+  .contact-item {
+    background: rgba(255,255,255,0.14) !important;
+    border: 1px solid rgba(255,255,255,0.22) !important;
+    padding: 14px 20px !important;
+    border-radius: 14px !important;
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; color: white !important;
+    font-size: 14px !important; font-weight: 600 !important;
+    min-width: 190px;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+    position: relative; overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+  .contact-item::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.08);
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .contact-item:hover {
+    background: rgba(255,255,255,0.26) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.18) !important;
+    border-color: rgba(255,255,255,0.4) !important;
+  }
+  .contact-item:hover::before { opacity: 1; }
+  .contact-item:active { transform: scale(0.97) !important; }
+  .contact-item-icon {
+    font-size: 18px; flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .contact-item:hover .contact-item-icon { transform: scale(1.25) rotate(-8deg); }
+
+  /* ══ ALL BUTTONS — premium animated ══ */
+  .btn-primary, .btn-secondary, .nav-cta {
+    position: relative; overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+  }
+  .btn-primary:hover, .nav-cta:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 28px rgba(107,138,106,0.38) !important;
+  }
+  .btn-primary:active, .nav-cta:active { transform: scale(0.97) !important; }
+  .btn-secondary:hover { transform: translateY(-2px) !important; }
+
+  /* ══ SERVICE CARDS — 3D hover ══ */
+  .service-card {
+    transform-style: preserve-3d;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease !important;
+    cursor: default;
+  }
+  .service-card:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 24px 52px rgba(30,42,30,0.13) !important;
+  }
+
+  /* ══ TESTIMONIAL CARDS — glassmorphism + tilt ══ */
+  .testi-card {
+    background: rgba(255,255,255,0.82) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(255,255,255,0.6) !important;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+    cursor: default;
+  }
+  .testi-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 24px 52px rgba(30,42,30,0.13) !important;
+    background: rgba(255,255,255,0.96) !important;
+  }
+
+  /* Ripple keyframe */
+  @keyframes rippleAnim { to { transform: scale(22); opacity: 0; } }
+
+  @media(max-width:900px){
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .how-arrow { display: none; }
+  }
+  @media(max-width:560px){
+    .how-grid { grid-template-columns: 1fr; }
+  }
+
+
+  /* ══ HAMBURGER BUTTON ══ */
+  .hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 40px; height: 40px;
+    background: transparent; border: none; cursor: pointer;
+    padding: 4px; border-radius: 8px;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .hamburger:hover { background: var(--sage-xlight); }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--text-dark); border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ══ MOBILE MENU OVERLAY ══ */
+  .mobile-menu {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(320px, 85vw);
+    background: white;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+    z-index: 1000;
+    padding: 80px 32px 40px;
+    display: flex; flex-direction: column; gap: 0;
+    transform: translateX(100%);
+    transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-close {
+    position: absolute; top: 18px; right: 18px;
+    background: var(--sage-xlight); border: none; cursor: pointer;
+    width: 36px; height: 36px; border-radius: 50%;
+    font-size: 16px; color: var(--text-mid);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .mobile-close:hover { background: var(--sage-light); color: var(--sage-dark); }
+  .mobile-menu ul {
+    list-style: none; display: flex; flex-direction: column;
+    gap: 4px; margin-bottom: 32px;
+  }
+  .mobile-menu ul li a {
+    display: block; padding: 14px 16px;
+    font-size: 16px; font-weight: 600; color: var(--text-dark);
+    text-decoration: none; border-radius: 12px;
+    transition: all 0.2s;
+  }
+  .mobile-menu ul li a:hover { background: var(--sage-xlight); color: var(--sage-dark); }
+  .mobile-cta {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--sage-dark); color: white;
+    padding: 15px 24px; border-radius: 50px;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 6px 20px rgba(107,138,106,0.3);
+  }
+  .mobile-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(107,138,106,0.4); }
+
+  /* Menu backdrop */
+  .menu-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+    z-index: 999; opacity: 0; pointer-events: none;
+    transition: opacity 0.38s ease;
+    backdrop-filter: blur(3px);
+  }
+  .menu-backdrop.open { opacity: 1; pointer-events: all; }
+
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+    nav .nav-links { display: none; }
+  }
+
+
+  /* ══ HIDE DOG TILE ON MOBILE/TABLET ══ */
+  @media (max-width: 768px) {
+    .hero-visual { display: none !important; }
+    .hero {
+      grid-template-columns: 1fr !important;
+      padding-top: 100px !important;
+    }
+    .hero-content { max-width: 100% !important; }
+    .hero p { max-width: 100% !important; }
+  }
+  @media (min-width: 769px) and (max-width: 900px) {
+    .hero-visual { display: none !important; }
+    .hero { grid-template-columns: 1fr !important; }
+  }
+
+
+  /* ── BLUE FLASH FIX ON TOUCH DEVICES ── */
+  a, button, input, select, textarea, label,
+  [role="button"], .reminder-card, .service-card,
+  .testi-card, .faq-q, .contact-item, .trust-badge,
+  .how-step-animated, .nav-cta, .step-card {
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  button:focus, a:focus { outline: none; }
+  button:focus-visible, a:focus-visible {
+    outline: 2px solid #5a7a59; outline-offset: 2px;
+  }
+
+  /* ════════════════════════════
+     PARTNER CLINICS SECTION
+     ════════════════════════════ */
+
+  /* Section wrapper */
+  .clinics-section {
+    padding: 80px 5%;
+  }
+
+  /* Single clinic card — premium */
+  .clinic-card {
+    background: white;
+    border-radius: 28px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(30,42,30,0.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+    transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .clinic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(30,42,30,0.14);
+  }
+
+  /* Left — clinic photo */
+  .clinic-photo {
+    position: relative; overflow: hidden;
+  }
+  .clinic-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    display: block;
+  }
+  .clinic-card:hover .clinic-photo img { transform: scale(1.04); }
+  .clinic-verified-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: white;
+    border-radius: 50px;
+    padding: 6px 14px;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700;
+    color: var(--sage-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    letter-spacing: 0.04em;
+  }
+  .clinic-verified-badge::before { content: '✓'; font-weight: 900; }
+
+  /* Right — clinic info */
+  .clinic-info {
+    padding: 36px 36px 32px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .clinic-tag {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--sage-dark);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .clinic-tag::before {
+    content: ''; width: 18px; height: 2px;
+    background: var(--sage-dark); border-radius: 1px;
+  }
+  .clinic-name {
+    font-family: 'Bricolage Grotesque', 'Playfair Display', serif;
+    font-size: 26px; font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.2; margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .clinic-specialty {
+    font-size: 13px; color: var(--text-muted);
+    margin-bottom: 20px; line-height: 1.6;
+  }
+
+  /* Detail rows */
+  .clinic-details {
+    display: flex; flex-direction: column; gap: 11px;
+    margin-bottom: 24px; flex: 1;
+  }
+  .clinic-detail-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; color: var(--text-mid); line-height: 1.5;
+  }
+  .clinic-detail-icon {
+    font-size: 15px; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* Timings chip */
+  .clinic-timings {
+    display: flex; flex-wrap: wrap; gap: 7px;
+    margin-bottom: 24px;
+  }
+  .timing-chip {
+    background: var(--sage-xlight);
+    border: 1px solid rgba(143,166,142,0.25);
+    border-radius: 50px;
+    padding: 5px 12px;
+    font-size: 11px; font-weight: 600;
+    color: var(--sage-dark);
+  }
+
+  /* CTA buttons */
+  .clinic-actions {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .clinic-btn-primary {
+    display: flex; align-items: center; gap: 7px;
+    background: var(--sage-dark); color: white;
+    padding: 11px 22px; border-radius: 50px;
+    font-size: 13px; font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative; overflow: hidden;
+    box-shadow: 0 4px 14px rgba(107,138,106,0.3);
+  }
+  .clinic-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(107,138,106,0.42);
+  }
+  .clinic-btn-primary:active { transform: scale(0.97); }
+  .clinic-btn-secondary {
+    display: flex; align-items: center; gap: 7px;
+    background: transparent; color: var(--text-mid);
+    padding: 11px 20px; border-radius: 50px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none; border: 1.5px solid var(--border);
+    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .clinic-btn-secondary:hover {
+    border-color: var(--sage-light); color: var(--sage-dark);
+    transform: translateY(-2px);
+  }
+
+  /* Partner CTA banner */
+  .partner-cta-wrap {
+    margin-top: 48px; max-width: 960px;
+    margin-left: auto; margin-right: auto;
+    background: var(--sage-xlight);
+    border: 1px solid rgba(143,166,142,0.25);
+    border-radius: 20px;
+    padding: 32px 36px;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 24px;
+    flex-wrap: wrap;
+  }
+  .partner-cta-text h4 {
+    font-family: 'Bricolage Grotesque', 'Playfair Display', serif;
+    font-size: 20px; font-weight: 800;
+    color: var(--text-dark); margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .partner-cta-text p {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6;
+  }
+  .partner-cta-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--sage-dark); color: white;
+    padding: 13px 28px; border-radius: 50px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 4px 14px rgba(107,138,106,0.3);
+    position: relative; overflow: hidden;
+  }
+  .partner-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(107,138,106,0.4);
+  }
+  .partner-cta-btn:active { transform: scale(0.97); }
+  .partner-cta-btn .btn-arrow {
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .partner-cta-btn:hover .btn-arrow { transform: translateX(4px); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .clinic-card { grid-template-columns: 1fr; min-height: auto; }
+    .clinic-photo { height: 220px; }
+    .clinic-info { padding: 24px 20px; }
+    .clinic-name { font-size: 22px; }
+    .partner-cta-wrap { flex-direction: column; padding: 24px 20px; }
+    .partner-cta-btn { width: 100%; justify-content: center; }
+  }
+  @media (max-width: 480px) {
+    .clinics-section { padding: 56px 4%; }
+    .clinic-card { border-radius: 20px; }
+    .clinic-info { padding: 20px 16px; }
+    .clinic-name { font-size: 20px; }
+    .clinic-actions { flex-direction: column; }
+    .clinic-btn-primary, .clinic-btn-secondary { justify-content: center; }
+  }
+
+
+  /* ══════════════════════════════════════
+     NAV CTA GROUP — PRIMARY + SECONDARY
+     ══════════════════════════════════════ */
+
+  .nav-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Secondary — "Are you a vet? →" */
+  /* Text-only, no button styling, low visual priority */
+  .nav-vet-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600;
+    color: var(--sage-dark); text-decoration: none;
+    padding: 7px 14px; border-radius: 50px;
+    border: 1.5px solid var(--sage-light);
+    white-space: nowrap;
+    transition: all 0.22s ease;
+  }
+  .nav-vet-link:hover { background: var(--sage-xlight); border-color: var(--sage-dark); }
+  /* No button border, no background — pure text link */
+
+  /* Primary — "Register Your Pet" */
+  .nav-register-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    background: var(--sage-dark);
+    color: #fff !important;
+    padding: 11px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    /* Premium shadow */
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.08),
+      0 4px 12px rgba(74,107,73,0.28),
+      0 8px 24px rgba(74,107,73,0.18);
+    transition:
+      transform 0.25s cubic-bezier(0.34,1.56,0.64,1),
+      box-shadow 0.25s cubic-bezier(0.34,1.56,0.64,1),
+      background 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Subtle inner highlight for premium glass feel */
+  .nav-register-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+    border-radius: 50px 50px 0 0;
+    pointer-events: none;
+  }
+  /* Hover: lift + stronger shadow */
+  .nav-register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.1),
+      0 8px 20px rgba(74,107,73,0.38),
+      0 16px 40px rgba(74,107,73,0.22);
+    background: #3a5a39;
+  }
+  .nav-register-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.08),
+      0 2px 8px rgba(74,107,73,0.2);
+  }
+
+  /* Hide vet link on small screens, keep register btn */
+  @media (max-width: 640px) {
+    .nav-vet-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600;
+    color: var(--sage-dark); text-decoration: none;
+    padding: 7px 14px; border-radius: 50px;
+    border: 1.5px solid var(--sage-light);
+    white-space: nowrap;
+    transition: all 0.22s ease;
+  }
+    .nav-register-btn { padding: 10px 18px; font-size: 13px; }
+  }
+  @media (max-width: 480px) {
+    .nav-cta-group { gap: 10px; }
+    .nav-register-btn { padding: 9px 14px; font-size: 12px; }
+  }
+
+
+  /* ══ NAV TRUST INDICATOR ══ */
+  /* Subtle, unobtrusive — sits between vet link and CTA */
+  .nav-trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    /* Very subtle tinted background */
+    background: rgba(143,166,142,0.08);
+    border: 1px solid rgba(143,166,142,0.18);
+    padding: 5px 10px;
+    border-radius: 50px;
+    /* Fade in softly on load */
+    animation: trustFadeIn 0.8s ease 0.4s both;
+  }
+  @keyframes trustFadeIn {
+    from { opacity: 0; transform: translateY(-3px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .nav-trust-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4ade80; /* green pulse — live/verified feel */
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px rgba(74,222,128,0.25);
+    animation: trustPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes trustPulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(74,222,128,0.25); }
+    50%       { box-shadow: 0 0 0 4px rgba(74,222,128,0.1); }
+  }
+  /* Hide trust pill on smaller screens — keep CTA visible */
+  @media (max-width: 900px) {
+    .nav-trust-pill { display: none; }
+  }
+  @media (max-width: 640px) {
+    .nav-trust-pill { display: none; }
+  }
+
+
+  /* ── PREMIUM LOGO AREA ── */
+  .nav-logo {
+    position: relative;
+  }
+  .nav-logo::after {
+    content: '';
+    position: absolute;
+    right: -18px;
+    top: 12%;
+    height: 76%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(143,166,142,0.25), transparent);
+  }
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    gap: 1px;
+  }
+  .nav-logo-text span:first-child {
+    font-family: 'Bricolage Grotesque', 'Playfair Display', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--sage-dark);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .nav-logo-text span:last-child {
+    font-size: 8.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  /* Pulse ring on logo hover */
+  .nav-logo img {
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease !important;
+  }
+  /* Make register button larger and more prominent */
+  .nav-register-btn {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    padding: 10px 22px !important;
+    letter-spacing: -0.01em;
+  }
+  /* For Vets pill — refined */
+  .nav-vet-link {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    padding: 8px 16px !important;
+  }
+  /* Increase body top padding for taller nav */
+  body { padding-top: 0; }
+  section:first-of-type { padding-top: 68px; }
+  /* Mobile header overflow fix: keep logo + hamburger visible, move CTAs into the menu. */
+  @media (max-width: 760px) {
+    nav {
+      height: 64px;
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .nav-logo {
+      min-width: 0;
+      max-width: calc(100% - 52px);
+    }
+
+    .nav-logo img,
+    #nav-img {
+      width: 40px !important;
+      height: 40px !important;
+      border-radius: 11px !important;
+    }
+
+    .nav-logo-text {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .nav-logo-text span {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .nav-logo-text span:first-child {
+      font-size: 17px;
+    }
+
+    .nav-logo-text span:last-child {
+      font-size: 8px;
+      letter-spacing: 0.1em;
+    }
+
+    .nav-cta-group {
+      display: none !important;
+    }
+
+    .hamburger {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 5px !important;
+      flex: 0 0 40px;
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .nav-logo {
+      gap: 8px;
+    }
+
+    .nav-logo-text span:first-child {
+      font-size: 15px;
+    }
+
+    .nav-logo-text span:last-child {
+      font-size: 7px;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  /* ── NAV MOBILE FIX ── */
+  @media (max-width: 768px) {
+    .nav-vet-link { display: none !important; }
+    .nav-register-btn {
+      font-size: 12px !important;
+      padding: 8px 12px !important;
+      white-space: nowrap;
+    }
+    .nav-logo-text span:last-child { display: block !important; }
+    .nav-cta-group { gap: 8px !important; }
+  }
+  @media (max-width: 380px) {
+    .nav-register-btn { display: none !important; }
+  }
+
+
+  /* ── PERFORMANCE ── */
+  .reveal, .reveal-left, .reveal-right { will-change: transform, opacity; }
+  .service-card, .testi-card { will-change: transform; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal, .reveal-left, .reveal-right {
+      opacity: 1 !important; transform: none !important;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <div style="position:relative;flex-shrink:0;">
+      <img src="favicon-192.png" alt="The Good Vets Logo" id="nav-img"
+        style="width:44px;height:44px;border-radius:12px;object-fit:cover;border:2px solid var(--sage-light);box-shadow:0 2px 10px rgba(143,166,142,0.25);display:block;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s ease;" />
+      <span style="position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;background:#22c55e;border:2px solid white;border-radius:50%;display:block;" title="Verified"></span>
+    </div>
+    <div class="nav-logo-text">
+      <span>The Good Vets</span>
+      <span>Preventive Pet Healthcare</span>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#how" class="nav-item">How It Works</a></li>
+    <li><a href="#services" class="nav-item">Services</a></li>
+    <li><a href="#faq" class="nav-item">FAQ</a></li>
+    <li><a href="#contact-section" class="nav-item">Contact Us</a></li>
+  </ul>
+
+  <!-- Right CTA group -->
+  <div class="nav-cta-group">
+    <a href="clinics.html" class="nav-vet-link">For Vets 🏥</a>
+    <a href="register.html" class="nav-register-btn">Register Your Pet</a>
+  </div>
+  <!-- Hamburger button (mobile only) -->
+  <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()" aria-label="Close menu">✕</button>
+  <ul>
+    <li><a href="#how" onclick="toggleMenu()">How It Works</a></li>
+    <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+    <li><a href="#faq" onclick="toggleMenu()">FAQ</a></li>
+    <li><a href="#contact-section" onclick="toggleMenu()">Contact Us</a></li>
+  </ul>
+  <a href="register.html" class="mobile-cta">Register Your Pet →</a>
+  <a href="clinics.html" class="mobile-cta" style="margin-top:10px;background:transparent;color:var(--sage-dark);border:1.5px solid var(--sage-light);box-shadow:none;">For Vets — Partner With Us 🏥</a>
+</div>
+<div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
+
+<!-- ─── HERO ─────────────────────────────────── -->
+<section class="hero" id="home" style="padding-top:84px;">
+  <div class="hero-content">
+    <div class="hero-badge">Now Available in Moradabad</div>
+    <div style="margin-bottom: 32px; display:flex; gap: 12px; align-items:center;">
+      <div style="display:flex; gap:-8px;">
+        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&q=80&fit=crop" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid white;" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80&fit=crop" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid white;margin-left:-12px;" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=700&q=80&fit=crop" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid white;margin-left:-12px;" loading="lazy" />
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:600;color:var(--text-dark);margin:0;">Now enrolling in Moradabad</p>
+        <p style="font-size:12px;color:var(--text-muted);margin:0;">Be part of the founding community</p>
+      </div>
+    </div>
+
+    <h1>
+      Smart Pet Care<br/>
+      Starts With<br/>
+      <em>Timely Vaccinations</em>
+    </h1>
+    <p>
+      Never miss a pet vaccination ever again. The Good Vets is your
+      all-in-one preventive care platform — reminders, health records,
+      and trusted vet clinics, all in one place.
+    </p>
+    <div class="hero-actions">
+      <a href="register.html" class="btn-primary">Register Your Pet →</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item reveal reveal-delay-1">
+        <span class="stat-num" style="font-size:20px;">🚀</span>
+        <span class="stat-label">Launching in Moradabad</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <span class="stat-num" style="font-size:20px;">🏥</span>
+        <span class="stat-label">Be Our First Partner Clinic</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <span class="stat-num" style="font-size:20px;">💚</span>
+        <span class="stat-label">Affordable Plans</span>
+      </div>
+    </div>
+  </div>
+    <div class="hero-visual">
+    <div class="dog-tile-wrap">
+      <img
+        class="dog-tile-img"
+        src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=600&q=85&fit=crop"
+        alt="Happy pug dog"
+        loading="eager"
+      />
+      <!-- Top-left badge: Vaccination Due -->
+      <div class="notif-badge top-left">
+        <div class="notif-icon green">💉</div>
+        <div class="notif-text">
+          <strong>Vaccination Due Tomorrow</strong>
+          <span>WhatsApp reminder scheduled</span>
+        </div>
+      </div>
+      <!-- Bottom-right badge: Verified Clinic -->
+      <div class="notif-badge bottom-right">
+        <div class="notif-icon sage">🏥</div>
+        <div class="notif-text">
+          <strong>Verified Clinic</strong>
+          <span>Trusted veterinary partner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ──────────────────────────── -->
+<section id="how" style="padding: 80px 5%;">
+  <div class="how">
+    <span class="section-label">Simple Process</span>
+    <h2 class="section-title">How The Good Vets Works</h2>
+    <p class="section-sub">
+      Getting started takes just two minutes. Once registered, we handle all
+      the coordination so you can focus on what matters — loving your pet.
+    </p>
+    <div class="how-grid" style="position:relative;">
+      <div class="step-card how-step-animated" style="transition-delay:0.05s">
+        <div class="how-step-num">1</div>
+        <h4>Register Your Pet</h4>
+        <p>Fill in your pet's basic details & vaccination history in our simple form.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="step-card how-step-animated" style="transition-delay:0.15s">
+        <div class="how-step-num">2</div>
+        <h4>Verified</h4>
+        <p>We review and confirm your registration before activating reminder services.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="step-card how-step-animated" style="transition-delay:0.25s">
+        <div class="how-step-num">3</div>
+        <h4>Receive Reminders</h4>
+        <p>Timely WhatsApp reminders so you never miss a critical healthcare milestone.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="step-card how-step-animated" style="transition-delay:0.35s">
+        <div class="how-step-num">4</div>
+        <h4>Stay Healthy</h4>
+        <p>Your pet stays up-to-date with vaccinations, deworming & annual checkups.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ──────────────────────────────── -->
+<section id="services" style="padding: 80px 5%;">
+  <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; margin-bottom: 48px; gap: 24px; flex-wrap: wrap;">
+    <div>
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title" style="margin-bottom: 0;">
+        Everything Your Pet<br/>Needs to Thrive
+      </h2>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">💉</span>
+      <h4>Vaccination Tracking</h4>
+      <p>Complete vaccination schedule management with timely reminders sent directly to your WhatsApp before they're due.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">📋</span>
+      <h4>Digital Health Records</h4>
+      <p>A secure, lifetime digital health profile for your pet — accessible anytime, shareable with any vet clinic.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-icon">📅</span>
+      <h4>Preventive Care Calendar</h4>
+      <p>Annual deworming, tick prevention, dental care, and checkup schedules personalized to your pet's breed and age.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">🏥</span>
+      <h4>Clinic Network Access</h4>
+      <p>Priority booking at our network of verified, trusted veterinary clinics across Moradabad and surrounding areas.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">💬</span>
+      <h4>WhatsApp Health Support</h4>
+      <p>Ask basic pet health questions and get guidance from our care team directly on WhatsApp — anytime.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-icon">🔔</span>
+      <h4>Smart Reminder System</h4>
+      <p>Multiple reminder touchpoints — 7 days before, 1 day before, and on the day — ensuring 100% adherence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Register form moved to register.html -->
+
+
+<!-- ─── PHOTO STRIP ─────────────────────────── -->
+<section style="padding: 0 5% 80px;">
+  <div style="text-align:center; margin-bottom: 32px;">
+    <span class="section-label">Our Happy Patients</span>
+    <h2 class="section-title">Pets We've Helped Stay Healthy</h2>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-strip-item">
+      <img src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=700&q=80&fit=crop" alt="Family with their dog" loading="lazy" />
+      <span class="photo-label">Happy Pet Families</span>
+    </div>
+    <div class="photo-strip-item">
+      <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=800&q=80&fit=crop" alt="Vet with dog" loading="lazy" />
+      <span class="photo-label">Trusted Vets</span>
+    </div>
+    <div class="photo-strip-item">
+      <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80&fit=crop" alt="Healthy cat" loading="lazy" />
+      <span class="photo-label">All Pets Welcome</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT SPLIT ───────────────────────────── -->
+<section style="padding: 0 5% 80px;">
+  <div style="background: var(--sage-xlight); border-radius: 40px; padding: 0; overflow: hidden;">
+    <div class="about-split" style="padding: 64px 6%;">
+      <div>
+        <span class="section-label">Why Preventive Care</span>
+        <h2 class="section-title">Prevention Costs Less Than Treatment</h2>
+        <p style="color: var(--text-mid); font-size: 16px; line-height: 1.75; margin-bottom: 24px;">
+          Most pet health crises are preventable. A missed vaccine or skipped deworming 
+          can spiral into serious illness — and hefty vet bills. The Good Vets ensures 
+          your pet's care calendar is never ignored.
+        </p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px;">
+          <li style="display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--text-mid);">
+            <span style="color:var(--sage-dark); font-weight:700; font-size:16px; flex-shrink:0;">→</span>
+            Annual vaccination adherence drops by <strong>60%</strong> without reminders
+          </li>
+          <li style="display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--text-mid);">
+            <span style="color:var(--sage-dark); font-weight:700; font-size:16px; flex-shrink:0;">→</span>
+            Preventive care costs <strong>4–8x less</strong> than treating the same conditions
+          </li>
+          <li style="display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--text-mid);">
+            <span style="color:var(--sage-dark); font-weight:700; font-size:16px; flex-shrink:0;">→</span>
+            Pets with health records live <strong>longer, healthier</strong> lives
+          </li>
+        </ul>
+        <a href="register.html" class="btn-primary" style="margin-top:32px; display:inline-flex;">Start Protecting Your Pet →</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80&fit=crop" alt="Veterinarian with a pet" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ─── PARTNER CLINICS ──────────────────────────── -->
+<section style="padding: 80px 5%;">
+  <div style="text-align: center; margin-bottom: 48px;">
+    <span class="section-label">Pet Parent Stories</span>
+    <h2 class="section-title">Trusted by Families Across Moradabad</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal reveal-delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p>"Bruno used to miss his annual shots every year. Since joining The Good Vets, we haven't missed a single vaccine in 18 months. The WhatsApp reminders are lifesavers!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RS</div>
+        <div>
+          <span class="testi-name">Rohit Singh</span>
+          <span class="testi-pet">Bruno — Golden Retriever, 3 yrs</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p>"As a busy working mom, keeping track of Mochi's health was stressful. The Good Vets gave me peace of mind — they remind me before I even remember to think about it."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">PM</div>
+        <div>
+          <span class="testi-name">Priya Mehta</span>
+          <span class="testi-pet">Mochi — Persian Cat, 2 yrs</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-3">
+      <div class="testi-stars">★★★★★</div>
+      <p>"The digital health record feature is brilliant. When we traveled to Delhi and needed emergency vet care, we had Sheru's full history on our phone instantly."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AK</div>
+        <div>
+          <span class="testi-name">Amit Kapoor</span>
+          <span class="testi-pet">Sheru — Labrador, 5 yrs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────── -->
+<section id="faq" class="faq-section">
+  <div style="text-align: center; margin-bottom: 48px;">
+    <span class="section-label">Common Questions</span>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is this service available outside Moradabad?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        We're currently serving Moradabad and actively expanding to nearby cities including Rampur, Amroha, and Sambhal. Register your interest and we'll notify you when we launch in your area.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What happens after I register my pet?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        Our care coordinator will reach out on WhatsApp within 24 hours to confirm your enrollment, review your pet's health details, and share your customized preventive care calendar.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is registration paid?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        No — registration is completely free. After you register, our care coordinator will WhatsApp you within 24 hours to complete your pet's profile and explain how our care plans work. No pressure, no hidden charges — you decide what's right for your pet.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How is my pet's data kept private?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        We never share your personal or pet data with third parties outside our clinic network. All data is stored securely and used only to provide your pet's care services. Read our full Privacy Policy for details.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I register multiple pets?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        Absolutely! Simply submit a separate registration form for each pet. Our team will create individual health profiles and care plans for each of your furry family members.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT BANNER ────────────────────────── -->
+<section style="padding: 40px 5% 80px; scroll-margin-top: 80px;" id="contact-section">
+  <div class="contact-banner" id="contact">
+    <div>
+      <h2>Need Help? We're Here for You.</h2>
+      <p>Our customer care team is available 6 days a week to answer your questions and guide you through enrollment.</p>
+    </div>
+    <div class="contact-options">
+      <a href="https://wa.me/919675406277" class="contact-item" target="_blank">
+        <span class="contact-item-icon">💬</span>
+        Chat on WhatsApp
+      </a>
+      <a href="tel:+919675406277" class="contact-item">
+        <span class="contact-item-icon">📞</span>
+        Call Us
+      </a>
+      <a href="https://www.instagram.com/thegoodvets/" class="contact-item" target="_blank" rel="noopener">
+        <span class="contact-item-icon">📸</span>
+        Instagram @thegoodvets
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="favicon-192.png" alt="Logo" id="footer-img" />
+        <span class="footer-logo-text">The Good Vets</span>
+      </div>
+      <p>India's most trusted preventive pet healthcare subscription service. Because your pet's health shouldn't depend on memory.</p>
+      <span class="footer-tagline">Love · Care · Prevent</span>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul class="footer-links">
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#register">Register Your Pet</a></li>
+        <li><a href="#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/919675406277" target="_blank">WhatsApp Us</a></li>
+      
+        <li><a href="tel:+919675406277">Call Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul class="footer-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="terms.html#refund">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 The Good Vets. All rights reserved. Moradabad, India.</span>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── PRIVACY MODAL ──────────────────────────── -->
+<div class="modal-backdrop" id="privacyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('privacyModal')">✕</button>
+    <h2>Privacy Policy</h2>
+    <p><strong>Effective Date:</strong> January 1, 2025</p>
+    <p>The Good Vets ("we", "our", "us") is committed to protecting your and your pet's personal information. This policy explains what we collect and how we use it.</p>
+    <h3>1. Information We Collect</h3>
+    <p>We collect information you provide during registration, including your name, contact details, and your pet's health information.</p>
+    <h3>2. How We Use Your Information</h3>
+    <ul>
+      <li>To send WhatsApp reminders for vaccinations and checkups</li>
+      <li>To maintain your pet's digital health records</li>
+      <li>To coordinate with our partner vet clinics</li>
+      <li>To improve our services</li>
+    </ul>
+    <h3>3. Data Sharing</h3>
+    <p>We do not sell your data. We share minimal necessary information only with our network of verified veterinary clinics for the purpose of providing care to your pet.</p>
+    <h3>4. Data Security</h3>
+    <p>Your data is stored securely using Google's infrastructure. We use industry-standard protocols to protect against unauthorized access.</p>
+    <h3>5. Your Rights</h3>
+    <p>You may request deletion or correction of your data at any time by contacting us on <a href="https://wa.me/919675406277" target="_blank" rel="noopener">WhatsApp: +91 96754 06277</a>.</p>
+    <h3>6. Contact</h3>
+    <p>Questions about this policy? Message us on <a href="https://wa.me/919675406277" target="_blank" rel="noopener">WhatsApp: +91 96754 06277</a>.</p>
+  </div>
+</div>
+
+<!-- ─── TERMS MODAL ────────────────────────────── -->
+<div class="modal-backdrop" id="termsModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('termsModal')">✕</button>
+    <h2>Terms & Conditions</h2>
+    <p><strong>Effective Date:</strong> January 1, 2025</p>
+    <p>By registering with The Good Vets, you agree to these Terms and Conditions. Please read them carefully.</p>
+    <h3>1. Service Description</h3>
+    <p>The Good Vets provides a subscription-based pet preventive care coordination service. We send reminders, maintain health records, and facilitate vet appointments — we are not a veterinary clinic.</p>
+    <h3>2. Registration</h3>
+    <p>You must provide accurate information during registration. You are responsible for keeping your contact details up to date so we can send timely reminders.</p>
+    <h3>3. No Medical Advice</h3>
+    <p>Reminders and information provided by The Good Vets do not constitute veterinary medical advice. Always consult a licensed veterinarian for medical decisions about your pet.</p>
+    <h3>4. Subscription Plans</h3>
+    <p>Service plans are described at enrollment. Pricing and features may be updated with 30 days' notice. You may cancel at any time.</p>
+    <h3>5. Limitation of Liability</h3>
+    <p>The Good Vets is not liable for any health outcomes related to your pet. Our role is coordination and reminders only.</p>
+    <h3>6. Governing Law</h3>
+    <p>These Terms are governed by the laws of India. Any disputes will be subject to the jurisdiction of courts in Moradabad, Uttar Pradesh.</p>
+  </div>
+</div>
+
+<!-- ─── REFUND MODAL ───────────────────────────── -->
+<div class="modal-backdrop" id="refundModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('refundModal')">✕</button>
+    <h2>Refund Policy</h2>
+    <p><strong>Effective Date:</strong> January 1, 2025</p>
+    <h3>Registration &amp; Plans</h3>
+    <p>Registration is free. After enrollment, our care coordinator will walk you through available care plan options for reminders, records, and clinic coordination — no pressure.</p>
+    <h3>Subscription Plans</h3>
+    <p>Subscription fees paid are refundable within 7 days of purchase if you are not satisfied with our service. To request a refund, contact us on <a href="https://wa.me/919675406277" target="_blank" rel="noopener">WhatsApp: +91 96754 06277</a>.</p>
+    <h3>No Refunds After 7 Days</h3>
+    <p>Refunds will not be issued after 7 days of the subscription start date, as our team would have already invested in setting up your pet's care plan.</p>
+    <h3>Contact</h3>
+    <p>Refund requests: <a href="https://wa.me/919675406277" target="_blank" rel="noopener">WhatsApp: +91 96754 06277</a></p>
+  </div>
+</div>
+
+<!-- ─── TOAST ──────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── Logo image fallback (if JPEG not served, use inline SVG) ── */
+const logoSVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%238FA68E'/%3E%3Ctext x='50' y='62' font-size='40' text-anchor='middle' fill='white' font-family='serif'%3E🐾%3C/text%3E%3C/svg%3E`;
+
+['nav-img','hero-img','footer-img'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.onerror = () => { el.src = logoSVG; };
+});
+
+/* ── Modal ── */
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-backdrop').forEach(bd => {
+  bd.addEventListener('click', e => {
+    if (e.target === bd) closeModal(bd.id);
+  });
+});
+
+/* ── FAQ ── */
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+/* ── Toast ── */
+function showToast(msg, duration = 4000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+/* ── GOOGLE FORM INTEGRATION ──────────────────────────────────
+   
+   HOW TO SET UP:
+   1. Create your Google Form with fields matching columns A–M
+   2. Open the form → right-click → "View Page Source"
+   3. Search for "entry." to find entry IDs for each field
+   4. Replace the GOOGLE_FORM_ACTION_URL below with your form's
+      action URL (found in the form source as FB_PUBLIC_LOAD_DATA_)
+   5. Map each entry_XXXXXX to the correct field
+
+   EXAMPLE:
+     GOOGLE_FORM_ACTION_URL = 
+       'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse'
+     entry for Owner Name: 'entry.1234567890'
+   
+   The form will submit in the background — user stays on site.
+──────────────────────────────────────────────────────────── */
+
+const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSe-oHpX-1z90XJduX9E6b0kw-fHA5rknIJDhLruJhgk3n3qgg/formResponse';
+
+// Map these entry IDs from your Google Form source:
+const ENTRY_IDS = {
+  timestamp:    null,                  // Col A — auto-filled by Google
+  ownerName:   'entry.1286128235',     // Col B — Owner Name
+  whatsapp:    'entry.2055928706',     // Col C — WhatsApp (prefixed with 91)
+  phone:       'entry.865272150',      // Col D — Phone (prefixed with 91)
+  email:       'entry.2124430166',     // Col E — Email
+  petName:     'entry.413177068',      // Col F — Pet Name
+  petType:     'entry.651109443',      // Col G — Pet Type
+  breed:       'entry.1015403563',     // Col H — Breed
+  gender:      'entry.393295299',      // Col I — Gender
+  age:         'entry.1123364940',     // Col J — Age of the pet
+  vacStatus:   'entry.1152008025',     // Col K — Vaccination Status
+  medNotes:    'entry.1782921775',     // Col L — Medical Notes
+  reminderType:'entry.790695375',      // Col M — Reminder Type
+};
+
+/* ── Form Submit ── */
+document.getElementById('petForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const ownerName = document.getElementById('ownerName').value.trim();
+  const whatsapp  = document.getElementById('whatsapp').value.trim();
+  const petName   = document.getElementById('petName').value.trim();
+  const petType   = document.getElementById('petType').value;
+
+  if (!ownerName || !whatsapp || !petName || !petType) {
+    showToast('⚠️ Please fill in all required fields.');
+    return;
+  }
+
+  const submitBtn  = document.getElementById('submitBtn');
+  const submitText = document.getElementById('submitText');
+  const spinner    = document.getElementById('spinner');
+
+  submitBtn.disabled = true;
+  submitText.textContent = 'Registering...';
+  spinner.style.display = 'block';
+
+  const formData = new FormData();
+  const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+  // Helper: strip leading zeros/+91 then always prefix with 91
+  function fmtPhone(val) {
+    let n = val.replace(/\D/g,'');
+    if (n.startsWith('91') && n.length >= 12) return n;
+    if (n.startsWith('0')) n = n.slice(1);
+    return '91' + n;
+  }
+
+  // Timestamp is auto-set by Google Forms — skip appending it
+  formData.append(ENTRY_IDS.ownerName,    ownerName);
+  formData.append(ENTRY_IDS.whatsapp,     fmtPhone(whatsapp));
+  formData.append(ENTRY_IDS.phone,        fmtPhone(document.getElementById('phone').value || whatsapp));
+  formData.append(ENTRY_IDS.email,        document.getElementById('email').value);
+  formData.append(ENTRY_IDS.petName,      petName);
+  formData.append(ENTRY_IDS.petType,      petType);
+  formData.append(ENTRY_IDS.breed,        document.getElementById('breed').value);
+  formData.append(ENTRY_IDS.gender,       document.getElementById('gender').value);
+  formData.append(ENTRY_IDS.age,          document.getElementById('age').value);
+  formData.append(ENTRY_IDS.vacStatus,    document.getElementById('vacStatus').value);
+  formData.append(ENTRY_IDS.medNotes,     document.getElementById('medNotes').value);
+  formData.append(ENTRY_IDS.reminderType, document.getElementById('reminderType').value);
+
+  /* Google Forms doesn't allow CORS — we use a no-cors fetch.
+     The response will be opaque but the data IS saved to your sheet. */
+  try {
+    if (GOOGLE_FORM_ACTION_URL) {
+      await fetch(GOOGLE_FORM_ACTION_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      });
+    }
+    // Show success regardless (no-cors = opaque, can't check status)
+    document.getElementById('successMsg').classList.add('show');
+    document.getElementById('submitArea').style.display = 'none';
+    document.querySelectorAll('.form-group:not(.full), .form-group.full').forEach(el => {
+      el.style.opacity = '0.35'; el.style.pointerEvents = 'none';
+    });
+    // Scroll to success
+    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showToast('🐾 Registration complete! We\'ll WhatsApp you within 24 hrs.');
+  } catch(err) {
+    submitBtn.disabled = false;
+    submitText.textContent = 'Register My Pet';
+    spinner.style.display = 'none';
+    showToast('Something went wrong. Please try again or call us.');
+  }
+});
+
+/* ── Smooth nav ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+<script>
+/* ══ SCROLL REVEAL ══ */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
+    }
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){io.observe(el);});
+
+/* ══ CURSOR TILT ON TESTI CARDS ══ */
+document.querySelectorAll('.testi-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r=card.getBoundingClientRect();
+    var x=(e.clientX-r.left)/r.width-0.5;
+    var y=(e.clientY-r.top)/r.height-0.5;
+    card.style.transform='translateY(-6px) perspective(600px) rotateY('+(x*10)+'deg) rotateX('+(-y*8)+'deg)';
+  });
+  card.addEventListener('mouseleave',function(){
+    card.style.transform='translateY(0) perspective(600px) rotateY(0deg) rotateX(0deg)';
+    card.style.transition='transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+  });
+  card.addEventListener('mouseenter',function(){
+    card.style.transition='transform 0.12s ease';
+  });
+});
+
+/* ══ HERO PARALLAX ══ */
+var heroCard=document.querySelector('.hero-card');
+var heroBadge=document.querySelector('.hero-badge');
+window.addEventListener('mousemove',function(e){
+  if(!heroCard)return;
+  var x=(e.clientX/window.innerWidth-0.5)*0.5;
+  var y=(e.clientY/window.innerHeight-0.5)*0.5;
+  heroCard.style.transform='perspective(800px) rotateY('+(x*6)+'deg) rotateX('+(-y*6)+'deg) translateY('+Math.sin(Date.now()/1000)*6+'px)';
+  heroCard.style.transition='transform 0.15s ease';
+  if(heroBadge){heroBadge.style.transform='translateX('+(x*12)+'px) translateY('+(y*8)+'px)';}
+},{passive:true});
+
+/* ══ SERVICE CARD TILT ══ */
+document.querySelectorAll('.service-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r=card.getBoundingClientRect();
+    var x=(e.clientX-r.left)/r.width-0.5;
+    var y=(e.clientY-r.top)/r.height-0.5;
+    card.style.transform='translateY(-6px) scale(1.01) perspective(600px) rotateY('+(x*8)+'deg) rotateX('+(-y*6)+'deg)';
+    card.style.transition='transform 0.1s ease';
+  });
+  card.addEventListener('mouseleave',function(){
+    card.style.transform='translateY(0) scale(1) perspective(600px) rotateY(0deg) rotateX(0deg)';
+    card.style.transition='transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+  });
+});
+
+/* ══ BUTTON RIPPLE ══ */
+document.querySelectorAll('.btn-primary,.nav-cta').forEach(function(btn){
+  btn.addEventListener('click',function(e){
+    var r=btn.getBoundingClientRect();
+    var ripple=document.createElement('span');
+    ripple.style.cssText='position:absolute;border-radius:50%;width:4px;height:4px;background:rgba(255,255,255,0.5);transform:scale(1);animation:ripple 0.5s ease forwards;left:'+(e.clientX-r.left-2)+'px;top:'+(e.clientY-r.top-2)+'px;pointer-events:none;';
+    btn.appendChild(ripple);
+    setTimeout(function(){ripple.remove();},500);
+  });
+});
+</script>
+
+
+<script>
+/* How-it-works steps reveal */
+var stepObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');stepObs.unobserve(e.target);}});
+},{threshold:0.15});
+document.querySelectorAll('.how-step-animated').forEach(function(el){stepObs.observe(el);});
+
+/* Ripple on ALL buttons */
+document.querySelectorAll('a.btn-primary, a.btn-secondary, a.nav-cta, button').forEach(function(btn){
+  btn.addEventListener('click',function(e){
+    var r=btn.getBoundingClientRect();
+    var rp=document.createElement('span');
+    rp.style.cssText='position:absolute;border-radius:50%;width:6px;height:6px;pointer-events:none;'+
+      'background:rgba(255,255,255,0.4);animation:rippleAnim 0.55s ease forwards;'+
+      'left:'+(e.clientX-r.left-3)+'px;top:'+(e.clientY-r.top-3)+'px;';
+    if(getComputedStyle(btn).position==='static')btn.style.position='relative';
+    btn.style.overflow='hidden';
+    btn.appendChild(rp);
+    setTimeout(function(){rp.remove();},560);
+  });
+});
+</script>
+
+
+<script>
+/* ══ SCROLL REVEAL for how-steps ══ */
+var stepObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('visible');stepObs.unobserve(e.target);}
+  });
+},{threshold:0.12});
+document.querySelectorAll('.how-step-animated,.reveal,.reveal-left,.reveal-right').forEach(function(el){stepObs.observe(el);});
+
+/* ══ SERVICE CARD 3D TILT ══ */
+document.querySelectorAll('.service-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r=card.getBoundingClientRect();
+    var x=(e.clientX-r.left)/r.width-0.5;
+    var y=(e.clientY-r.top)/r.height-0.5;
+    card.style.transform='translateY(-8px) scale(1.01) perspective(700px) rotateY('+(x*9)+'deg) rotateX('+(-y*7)+'deg)';
+    card.style.transition='transform 0.09s ease';
+  });
+  card.addEventListener('mouseleave',function(){
+    card.style.transform='';
+    card.style.transition='transform 0.45s cubic-bezier(0.4,0,0.2,1)';
+  });
+});
+
+/* ══ TESTI CARD 3D TILT ══ */
+document.querySelectorAll('.testi-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r=card.getBoundingClientRect();
+    var x=(e.clientX-r.left)/r.width-0.5;
+    var y=(e.clientY-r.top)/r.height-0.5;
+    card.style.transform='translateY(-6px) perspective(600px) rotateY('+(x*10)+'deg) rotateX('+(-y*8)+'deg)';
+    card.style.transition='transform 0.09s ease';
+  });
+  card.addEventListener('mouseleave',function(){
+    card.style.transform='';
+    card.style.transition='transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+  });
+});
+
+/* ══ RIPPLE ON ALL BUTTONS ══ */
+function addRipple(btn){
+  if(btn.dataset.ripple)return;
+  btn.dataset.ripple='1';
+  btn.addEventListener('click',function(e){
+    if(getComputedStyle(btn).position==='static')btn.style.position='relative';
+    btn.style.overflow='hidden';
+    var r=btn.getBoundingClientRect();
+    var rp=document.createElement('span');
+    rp.style.cssText='position:absolute;border-radius:50%;width:6px;height:6px;pointer-events:none;background:rgba(255,255,255,0.45);animation:rippleAnim 0.55s ease forwards;left:'+(e.clientX-r.left-3)+'px;top:'+(e.clientY-r.top-3)+'px;';
+    btn.appendChild(rp);setTimeout(function(){rp.remove();},560);
+  });
+}
+document.querySelectorAll('a.btn-primary,a.btn-secondary,a.nav-cta,.contact-item').forEach(addRipple);
+</script>
+
+
+<script>
+function toggleMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var backdrop = document.getElementById('menuBackdrop');
+  var btn = document.getElementById('hamburger');
+  var nav = document.querySelector('nav');
+  var isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    backdrop.classList.remove('open');
+    btn.classList.remove('open');
+    if (nav) nav.classList.remove('menu-open');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    backdrop.classList.add('open');
+    btn.classList.add('open');
+    if (nav) nav.classList.add('menu-open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+// Close on escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var menu = document.getElementById('mobileMenu');
+    if (menu.classList.contains('open')) toggleMenu();
+  }
+});
+</script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0a2f5ac0a13b2c5',t:'MTc4MTIwNTQ4NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0a4de21a839baaa',t:'MTc4MTIyNTQ5Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0c7a497ea1ca79d',t:'MTc4MTU5MDEzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

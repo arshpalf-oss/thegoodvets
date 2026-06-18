@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png"/>
+  <link rel="apple-touch-icon" href="favicon-192.png"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+  <title>Partner With Us — The Good Vets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  
+  :root {
+    --sage: #8FA68E;
+    --sage-dark: #6b8a6a;
+    --sage-mid: #A9BFA8;
+    --sage-light: #c4d4c3;
+    --sage-xlight: #edf4ed;
+    --mint: #E8F4F8;
+    --gold: #D4A574;
+    --gold-dark: #b8885a;
+    --white: #ffffff;
+    --offwhite: #fafaf8;
+    --bg: #fafaf8;
+    --card: #ffffff;
+    --text: #1e2a1e;
+    --text-dark: #1e2a1e;
+    --text-mid: #4a5c4a;
+    --text-light: #859c84;
+    --muted: #4a5c4a;
+    --border: #e2ede1;
+    --bg-light: #fafaf8;
+    --danger: #dc2626;
+    --shadow: 0 2px 8px rgba(143,166,142,0.05), 0 12px 32px rgba(107,138,106,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.06), 0 20px 48px rgba(107,138,106,0.14);
+    --r: 18px; --r-lg: 28px; --r-xl: 36px;
+  }
+
+  html,body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;scroll-behavior:smooth;}
+  
+  /* Bricolage Grotesque for all major headings — matches index.html */
+  h1, h2, h3, .section-title, .hero-vets h1, .value-card h3 {
+    font-family: 'Bricolage Grotesque', sans-serif !important;
+    letter-spacing: -0.02em;
+    font-weight: 800 !important;
+  }
+  
+  body{background:
+    radial-gradient(circle at 8% 8%,#edf4ed 0%,transparent 30%),
+    radial-gradient(circle at 92% 92%,#e2ede1 0%,transparent 26%),
+    var(--bg);}
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: 68px; padding: 0 5%;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 0;
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, height 0.35s ease, z-index 0.38s ease;
+    will-change: background, box-shadow;
+  }
+  nav.menu-open {
+    z-index: 998 !important;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+  }
+  .nav-logo img {
+    width: 44px; height: 44px; border-radius: 12px; object-fit: cover;
+    border: 2px solid var(--sage-light);
+    box-shadow: 0 2px 10px rgba(143,166,142,0.25);
+    display: block; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .nav-logo:hover img { transform: scale(1.06); }
+  .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+  .nav-logo-text span:first-child {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 17px !important; font-weight: 800 !important;
+    color: var(--sage-dark) !important; letter-spacing: -0.03em !important; line-height: 1 !important;
+  }
+  .nav-logo-text span:last-child {
+    font-size: 8.5px !important; font-weight: 700 !important;
+    color: var(--muted) !important; letter-spacing: 0.2em !important;
+    text-transform: uppercase !important; opacity: 0.75 !important;
+    display: block !important;
+  }
+  .reg-nav-links {
+    display: flex; align-items: center;
+    gap: 4px; list-style: none; margin: 0; padding: 0;
+  }
+  .reg-nav-links a {
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--text-mid);
+    padding: 6px 12px; border-radius: 8px;
+    transition: color 0.2s ease, background 0.2s ease;
+    position: relative; white-space: nowrap;
+  }
+  .reg-nav-links a::after {
+    content: ''; position: absolute;
+    bottom: 2px; left: 12px; right: 12px;
+    height: 1.5px; background: var(--sage-dark);
+    border-radius: 1px;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  .reg-nav-links a:hover {
+    color: var(--sage-dark);
+    background: var(--sage-xlight);
+  }
+  .reg-nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta-group {
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  }
+  .nav-home-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    text-decoration: none; font-family: 'Poppins', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--text) !important; padding: 9px 18px;
+    border-radius: 50px; border: 1.5px solid var(--sage-light);
+    background: transparent; transition: all 0.22s ease;
+  }
+  .nav-home-btn:hover {
+    background: var(--sage-xlight);
+    border-color: var(--sage-dark);
+  }
+
+  /* ══ MOBILE MENU ══ */
+  .reg-hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: 40px; height: 40px;
+    background: transparent; border: none; cursor: pointer;
+    padding: 4px; border-radius: 8px;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .reg-hamburger:hover { background: var(--sage-xlight); }
+  .reg-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--text-dark); border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    transform-origin: center;
+  }
+  .reg-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .reg-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .reg-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .reg-mobile-menu {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(320px, 85vw);
+    background: white; z-index: 1000;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+    padding: 80px 32px 40px;
+    display: flex; flex-direction: column; gap: 0;
+    transform: translateX(100%);
+    transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+    will-change: transform;
+  }
+  .reg-mobile-menu.open { transform: translateX(0); }
+  .reg-close {
+    position: absolute; top: 18px; right: 18px;
+    background: var(--sage-xlight); border: none; cursor: pointer;
+    width: 36px; height: 36px; border-radius: 50%;
+    font-size: 16px; color: var(--text-mid);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .reg-close:hover { background: var(--sage-light); color: var(--sage-dark); }
+  .reg-mobile-menu ul {
+    list-style: none; display: flex; flex-direction: column;
+    gap: 4px; margin-bottom: 32px; padding: 0;
+  }
+  .reg-mobile-menu ul li a {
+    display: block; padding: 14px 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--text-dark);
+    text-decoration: none; border-radius: 12px;
+    transition: all 0.2s;
+  }
+  .reg-mobile-menu ul li a:hover { background: var(--sage-xlight); color: var(--sage-dark); }
+  
+  .reg-mobile-cta {
+    display: flex !important; align-items: center; justify-content: center;
+    background: var(--sage-dark); color: white !important;
+    padding: 15px 24px; border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 6px 20px rgba(107,138,106,0.3);
+    border: none; cursor: pointer; width: 100%;
+  }
+  .reg-mobile-cta:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 28px rgba(107,106,106,0.4); 
+  }
+
+  .reg-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+    z-index: 999; opacity: 0; pointer-events: none;
+    transition: opacity 0.38s ease; backdrop-filter: blur(3px);
+    will-change: opacity, backdrop-filter;
+  }
+  .reg-backdrop.open { opacity: 1; pointer-events: all; }
+
+  /* Responsive Headers */
+  @media (min-width: 769px) {
+    .reg-nav-links  { display: flex !important; }
+    .reg-hamburger  { display: none !important; }
+  }
+  @media (max-width: 768px) {
+    nav             { padding: 0 4%; }
+    .reg-nav-links  { display: none !important; }
+    .reg-hamburger  { display: flex !important; }
+    .nav-cta-group  { display: none !important; }
+  }
+
+  /* ── HERO SECTION ── */
+  .hero-vets {
+    padding: 140px 5% 80px;
+    text-align: center;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .badge-pilot {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sage-xlight); border: 1.5px solid var(--sage-light);
+    border-radius: 50px; padding: 10px 22px; margin-bottom: 24px;
+    font-size: 13px; font-weight: 700; color: var(--sage-dark);
+    font-family: 'Poppins', sans-serif; letter-spacing: -0.01em;
+    box-shadow: 0 4px 12px rgba(143,166,142,0.1);
+  }
+  .hero-vets h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 54px); line-height: 1.1;
+    font-weight: 700; color: var(--text); margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .hero-vets p {
+    font-size: clamp(15px, 2.5vw, 18px); line-height: 1.7;
+    color: var(--text-mid); max-width: 760px; margin: 0 auto 36px;
+  }
+  
+  /* Dual CTA Buttons */
+  .vets-cta-group {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; flex-wrap: wrap; margin-bottom: 40px;
+  }
+  .btn-vets-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--sage-dark); color: white !important;
+    padding: 16px 32px; border-radius: 100px;
+    font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 8px 24px rgba(107,138,106,0.25), 0 16px 36px rgba(107,138,106,0.12);
+    position: relative; overflow: hidden;
+  }
+  .btn-vets-primary::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+    border-radius: 100px 100px 0 0; pointer-events: none;
+  }
+  .btn-vets-primary:hover {
+    transform: translateY(-2px); background: #3a5a39;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 12px 32px rgba(74,107,73,0.35), 0 24px 48px rgba(74,107,73,0.22);
+  }
+  .btn-vets-primary:active { transform: translateY(0) scale(0.97); }
+
+  .btn-vets-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: white; color: var(--text-dark) !important;
+    padding: 16px 32px; border-radius: 100px;
+    font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+    text-decoration: none; border: 1.5px solid var(--sage-light);
+    cursor: pointer; transition: all 0.25s ease;
+  }
+  .btn-vets-secondary:hover {
+    background: var(--sage-xlight);
+    border-color: var(--sage-dark);
+    transform: translateY(-1px);
+  }
+  .btn-vets-secondary:active { transform: translateY(0); }
+
+  .vets-trust-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px; flex-wrap: wrap; opacity: 0.85;
+  }
+  .trust-item {
+    font-size: 13px; font-weight: 600; color: var(--text-mid);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .trust-item span { color: var(--sage-dark); font-size: 15px; }
+
+  /* ── WHAT YOU GET TODAY (VALUE PROP) ── */
+  .section-wrap {
+    padding: 90px 5%;
+    border-top: 1px solid var(--border);
+    background: rgba(255,255,255,0.4);
+  }
+  .section-header {
+    text-align: center; max-width: 700px; margin: 0 auto 56px;
+  }
+  .section-label {
+    display: inline-block; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; color: var(--sage-dark);
+    letter-spacing: 0.15em; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 38px); font-weight: 700;
+    color: var(--text); line-height: 1.25; letter-spacing: -0.01em;
+  }
+  
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px; max-width: 1100px; margin: 0 auto;
+  }
+  .value-card {
+    background: white; border: 1.5px solid var(--border);
+    border-radius: 24px; padding: 32px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative; overflow: hidden;
+  }
+  .value-card:hover {
+    transform: translateY(-4px); border-color: var(--sage-light);
+    box-shadow: var(--shadow-lg);
+  }
+  .card-icon-box {
+    width: 48px; height: 44px; border-radius: 12px;
+    background: var(--sage-xlight); color: var(--sage-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(143,166,142,0.15);
+  }
+  .value-card h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 18px; font-weight: 700; color: var(--text);
+    margin-bottom: 10px; letter-spacing: -0.01em;
+  }
+  .value-card p {
+    font-size: 13.5px; line-height: 1.6; color: var(--text-mid);
+  }
+
+  /* ── TRANSPARENT PRICING ── */
+  .pricing-wrap {
+    background: var(--offwhite);
+    border-top: 1px solid var(--border);
+    padding: 90px 5%;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 450px));
+    justify-content: center; gap: 32px;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .pricing-card {
+    background: white; border: 1.5px solid var(--border);
+    border-radius: 28px; padding: 44px 36px;
+    box-shadow: var(--shadow); display: flex; flex-direction: column;
+    position: relative;
+  }
+  .pricing-card.featured {
+    border-color: var(--sage-dark);
+    box-shadow: var(--shadow-lg);
+  }
+  .pricing-card.featured::after {
+    content: 'RECOMMENDED'; position: absolute;
+    top: 20px; right: 24px; background: var(--sage-dark);
+    color: white; font-size: 10px; font-weight: 800;
+    padding: 6px 14px; border-radius: 50px; letter-spacing: 0.08em;
+  }
+  .plan-name {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    color: var(--sage-dark); letter-spacing: 0.12em; margin-bottom: 10px;
+  }
+  .plan-price {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 34px; font-weight: 800; color: var(--text);
+    margin-bottom: 16px; letter-spacing: -0.02em;
+  }
+  .plan-price span {
+    font-size: 14px; font-weight: 500; color: var(--text-mid);
+    letter-spacing: 0; font-family: 'Poppins', sans-serif;
+  }
+  .plan-desc {
+    font-size: 14px; line-height: 1.6; color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .plan-features {
+    list-style: none; display: flex; flex-direction: column; gap: 14px;
+    margin-bottom: 36px; padding: 0;
+  }
+  .plan-features li {
+    font-size: 13px; font-weight: 600; color: var(--text-mid);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .plan-features li span {
+    color: var(--sage-dark); font-size: 14px; font-weight: 700;
+  }
+
+  /* ── COMING SOON FEATURES ── */
+  .coming-soon-wrap {
+    padding: 90px 5%; border-top: 1px solid var(--border);
+  }
+  .coming-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; max-width: 1100px; margin: 0 auto;
+  }
+  .coming-card {
+    background: rgba(255,255,255,0.5); border: 1.5px dashed var(--sage-light);
+    border-radius: 20px; padding: 24px; text-align: center;
+    transition: all 0.3s ease; position: relative;
+  }
+  .coming-card:hover {
+    background: white; border-style: solid; border-color: var(--sage-dark);
+    box-shadow: var(--shadow); transform: scale(1.02);
+  }
+  .coming-badge {
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    background: #e2ede1; color: var(--sage-dark); font-size: 9px;
+    font-weight: 800; padding: 4px 10px; border-radius: 50px;
+    letter-spacing: 0.05em; border: 1px solid var(--sage-light);
+  }
+  .coming-icon {
+    font-size: 26px; margin-bottom: 12px; display: inline-block;
+  }
+  .coming-card h4 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 16px; font-weight: 700; color: var(--text);
+    margin-bottom: 6px;
+  }
+  .coming-card p {
+    font-size: 12px; line-height: 1.5; color: var(--text-mid);
+  }
+
+  /* ── PARTNER FORM ── */
+  .form-section-wrap {
+    padding: 90px 5%; border-top: 1px solid var(--border);
+    background: linear-gradient(180deg, white 0%, var(--sage-xlight) 100%);
+  }
+  .partner-form-card {
+    background: white; border: 1.5px solid var(--border);
+    border-radius: 32px; padding: 48px; max-width: 600px;
+    margin: 0 auto; box-shadow: var(--shadow-lg);
+  }
+  .partner-form-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 700; color: var(--text);
+    margin-bottom: 8px; text-align: center;
+  }
+  .partner-form-card p {
+    font-size: 13.5px; color: var(--muted); text-align: center;
+    margin-bottom: 32px;
+  }
+  .pf-fields-wrap {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .pf-grid-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  @media (max-width: 560px) {
+    .pf-grid-row { grid-template-columns: 1fr; }
+    .partner-form-card { padding: 32px 20px; }
+  }
+  .form-input-vets {
+    width: 100%; height: 50px; border: 1.5px solid var(--border);
+    background: #fafcfb; border-radius: 12px;
+    padding: 0 16px; font-size: 13.5px; font-family: 'Poppins', sans-serif;
+    color: var(--text); outline: none; transition: all 0.25s ease;
+  }
+  .form-input-vets:focus {
+    border-color: var(--sage-dark); background: white;
+    box-shadow: 0 0 0 4px rgba(107,138,106,0.13); transform: translateY(-1px);
+  }
+  .form-select-vets {
+    width: 100%; height: 50px; border: 1.5px solid var(--border);
+    background: #fafcfb; border-radius: 12px;
+    padding: 0 16px; font-size: 13.5px; font-family: 'Poppins', sans-serif;
+    color: var(--text-mid); outline: none; transition: all 0.25s ease;
+    cursor: pointer; -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b8a6a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+  }
+  .form-select-vets:focus {
+    border-color: var(--sage-dark); background: white;
+    box-shadow: 0 0 0 4px rgba(107,138,106,0.13); transform: translateY(-1px);
+  }
+  .btn-form-submit {
+    width: 100%; height: 54px; border: none; border-radius: 50px;
+    background: var(--sage-dark); color: white;
+    font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow: 0 6px 18px rgba(107,138,106,0.2); margin-top: 10px;
+    position: relative; overflow: hidden;
+  }
+  .btn-form-submit::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+    border-radius: 50px 50px 0 0; pointer-events: none;
+  }
+  .btn-form-submit:hover {
+    transform: translateY(-2px); background: #3a5a39;
+    box-shadow: 0 10px 24px rgba(74,107,73,0.35);
+  }
+  .btn-form-submit:active { transform: translateY(0) scale(0.97); }
+  
+  .form-success-card {
+    display: none; text-align: center; padding: 20px 10px;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .form-success-card.visible { display: block; }
+  .form-success-icon { font-size: 40px; margin-bottom: 16px; }
+  .form-success-card h4 {
+    font-family: 'Playfair Display', serif; font-size: 22px;
+    font-weight: 700; color: var(--sage-dark); margin-bottom: 8px;
+  }
+  .form-success-card p { font-size: 13.5px; color: var(--muted); }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+  /* ── FOOTER — IDENTICAL TO HOMEPAGE INDEX.HTML ── */
+  footer {
+    background: var(--text-dark);
+    padding: 64px 5% 32px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 80px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+    text-align: left;
+  }
+
+  .footer-logo {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-logo img {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 2px solid rgba(143,166,142,0.4);
+  }
+
+  .footer-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: white; font-weight: 700;
+  }
+
+  .footer-brand p {
+    font-size: 13px; line-height: 1.7; max-width: 240px;
+    margin-bottom: 20px; text-align: left;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .footer-tagline {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    display: block; text-align: left;
+  }
+
+  .footer-col h5 {
+    font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: white; margin-bottom: 20px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 0; margin: 0;
+  }
+
+  .footer-links a {
+    text-decoration: none; font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--sage-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px;
+  }
+
+  .footer-bottom-links {
+    display: flex; gap: 24px;
+  }
+
+  .footer-bottom-links a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .footer-bottom-links a:hover { color: var(--sage-light); }
+
+  @media (max-width: 900px) {
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="regNav">
+  <a class="nav-logo" href="index.html">
+    <div style="position:relative;flex-shrink:0;">
+      <img src="favicon-192.png" alt="The Good Vets Logo"
+        style="width:44px;height:44px;border-radius:12px;object-fit:cover;border:2px solid var(--sage-light);box-shadow:0 2px 10px rgba(143,166,142,0.25);display:block;" />
+      <span style="position:absolute;bottom:-2px;right:-2px;width:12px;height:12px;background:#22c55e;border:2px solid white;border-radius:50%;display:block;"></span>
+    </div>
+    <div class="nav-logo-text">
+      <span>The Good Vets</span>
+      <span>Preventive Pet Healthcare</span>
+    </div>
+  </a>
+  
+  <ul class="reg-nav-links">
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="index.html#contact-section">Contact Us</a></li>
+  </ul>
+  
+  <div class="nav-cta-group">
+    <a href="index.html" class="nav-home-btn">← Back to Home</a>
+  </div>
+  
+  <button class="reg-hamburger" id="regHamburger" onclick="toggleRegMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="reg-mobile-menu" id="regMobileMenu">
+  <button class="reg-close" onclick="toggleRegMenu()" aria-label="Close menu">✕</button>
+  <ul>
+    <li><a href="index.html#how" onclick="toggleRegMenu()">How It Works</a></li>
+    <li><a href="index.html#services" onclick="toggleRegMenu()">Services</a></li>
+    <li><a href="index.html#faq" onclick="toggleRegMenu()">FAQ</a></li>
+    <li><a href="index.html#contact-section" onclick="toggleRegMenu()">Contact Us</a></li>
+  </ul>
+  <a href="index.html" class="reg-mobile-cta" onclick="toggleRegMenu()">← Back to Home</a>
+</div>
+<div class="reg-backdrop" id="regBackdrop" onclick="toggleRegMenu()"></div>
+
+
+<!-- ── HERO SECTION ── -->
+<header class="hero-vets">
+  <div class="badge-pilot">
+    <span>🏥</span> JOIN OUR EXCLUSIVE VET PILOT PROGRAM
+  </div>
+  <h1>Grow Your Practice with Automated Reminders</h1>
+  <p>
+    Automate pet record updates, lower appointment missed-rates, and receive new patient registrations referred directly from our premium booking platform. Try it now during our limited-time trial.
+  </p>
+  
+  <div class="vets-cta-group">
+    <a href="#join-form" class="btn-vets-primary">Apply for Pilot Program →</a>
+    <a href="https://wa.me/919675406277?text=Hi%2C%20I%20am%20interested%20in%20The%20Good%20Vets%20pilot%20program%20for%20my%20clinic." 
+       target="_blank" class="btn-vets-secondary">
+       💬 Chat on WhatsApp
+    </a>
+  </div>
+  
+  <div class="vets-trust-row">
+    <div class="trust-item"><span>✓</span> Limited-Time Free Trial</div>
+    <div class="trust-item"><span>✓</span> Vague Trial Length (Pilot Period)</div>
+    <div class="trust-item"><span>✓</span> Paid Subscription After Trial</div>
+  </div>
+</header>
+
+
+<!-- ── WHAT YOU GET TODAY (VALUE PROP) ── -->
+<section class="section-wrap" id="what-you-get">
+  <div class="section-header">
+    <span class="section-label">Features & benefits</span>
+    <h2 class="section-title">What Your Clinic Gets Today</h2>
+  </div>
+  
+  <div class="value-grid">
+    <!-- Item 1 -->
+    <div class="value-card">
+      <div class="card-icon-box">🐾</div>
+      <h3>Patient Registrations</h3>
+      <p>Receive direct patient registrations routed automatically to your clinic from pet owners referred through our booking platform.</p>
+    </div>
+    <!-- Item 2 -->
+    <div class="value-card">
+      <div class="card-icon-box">📅</div>
+      <h3>Appointment Bookings</h3>
+      <p>Streamline patient flows with integrated booking requests, cutting phone times and manual record overheads.</p>
+    </div>
+    <!-- Item 3 -->
+    <div class="value-card">
+      <div class="card-icon-box">💬</div>
+      <h3>WhatsApp Reminders</h3>
+      <p>Reach pet owners directly on WhatsApp where they are active, boosting click-throughs and follow-ups by up to 80%.</p>
+    </div>
+    <!-- Item 4 -->
+    <div class="value-card">
+      <div class="card-icon-box">💉</div>
+      <h3>Vaccination Reminders</h3>
+      <p>Automate dynamic healthcare schedules (Deworming, Grooming, Vaccination) to ensure patients never miss a dose.</p>
+    </div>
+    <!-- Item 5 -->
+    <div class="value-card">
+      <div class="card-icon-box">🗒️</div>
+      <h3>Pet Records Management</h3>
+      <p>Store, organize, and reference essential patient profiles, breed, weight logs, and medical notes in one clean interface.</p>
+    </div>
+    <!-- Item 6 -->
+    <div class="value-card">
+      <div class="card-icon-box">🏥</div>
+      <h3>Clinic Profile / Listing</h3>
+      <p>Build visual trust with a beautiful, custom clinic page showcasing your doctors, address, contact details, and referrals.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── TRANSPARENT, NON-FREE PRICING ── -->
+<section class="pricing-wrap" id="pricing-section">
+  <div class="section-header">
+    <span class="section-label">Value-First Pricing</span>
+    <h2 class="section-title">Clear & Transparent Pricing</h2>
+  </div>
+  
+  <div class="pricing-grid">
+    <!-- Card 1 -->
+    <div class="pricing-card">
+      <span class="plan-name">Pilot Trial</span>
+      <div class="plan-price">Free Trial <span>/ Limited Period</span></div>
+      <p class="plan-desc">Experience the patient growth and show-rate increases first. Start your pilot period with zero risk.</p>
+      <ul class="plan-features">
+        <li><span>✓</span> All Active Reminder Features</li>
+        <li><span>✓</span> Patient Registration Routing</li>
+        <li><span>✓</span> Automated WhatsApp Alerts</li>
+        <li><span>✓</span> Custom Public Clinic Profile</li>
+        <li><span>✓</span> No Credit Card Required</li>
+      </ul>
+      <a href="#join-form" class="btn-vets-secondary" style="text-align:center;margin-top:auto;">Start Free Trial</a>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="pricing-card featured">
+      <span class="plan-name">Growth Subscription</span>
+      <div class="plan-price">Paid Plan <span>/ Post Trial</span></div>
+      <p class="plan-desc">Supercharge your clinic operations. Custom, flexible pricing structured around your actual practice size.</p>
+      <ul class="plan-features">
+        <li><span>✓</span> Continuous Automated Reminders</li>
+        <li><span>✓</span> Dashboard Access (Coming Soon)</li>
+        <li><span>✓</span> Premium Priority Support</li>
+        <li><span>✓</span> Multi-Vet Hospital Management</li>
+        <li><span>✓</span> Preferred Booking Positioning</li>
+      </ul>
+      <a href="#join-form" class="btn-vets-primary" style="text-align:center;margin-top:auto;">Apply for Access</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── COMING SOON FEATURES ── -->
+<section class="coming-soon-wrap">
+  <div class="section-header">
+    <span class="section-label">Product Roadmap</span>
+    <h2 class="section-title">Coming Soon Features</h2>
+  </div>
+  
+  <div class="coming-grid">
+    <!-- Coming Card 1 -->
+    <div class="coming-card">
+      <div class="coming-badge">COMING SOON</div>
+      <div class="coming-icon">📊</div>
+      <h4>Clinic Dashboard</h4>
+      <p>A unified analytics portal to track active reminder click rates, monthly enrollments, and patient records.</p>
+    </div>
+    <!-- Coming Card 2 -->
+    <div class="coming-card">
+      <div class="coming-badge">COMING SOON</div>
+      <div class="coming-icon">📑</div>
+      <h4>Advanced EMR</h4>
+      <p>Automate electronic clinical charts, diagnostic records, prescription slips, and historical immunization logs.</p>
+    </div>
+    <!-- Coming Card 3 -->
+    <div class="coming-card">
+      <div class="coming-badge">COMING SOON</div>
+      <div class="coming-icon">💳</div>
+      <h4>Integrated Payments</h4>
+      <p>Collect patient consulting fees, deposit retainers, and reminder invoices securely online directly from our platform.</p>
+    </div>
+    <!-- Coming Card 4 -->
+    <div class="coming-card">
+      <div class="coming-badge">COMING SOON</div>
+      <div class="coming-icon">📈</div>
+      <h4>Analytics & Reports</h4>
+      <p>Understand patient churn, treatment metrics, clinic busy hours, and monthly financial growth insights.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PARTNER FORM ── -->
+<section class="form-section-wrap" id="join-form">
+  <div class="partner-form-card">
+    <div id="pfFormFields">
+      <h3>Apply for Pilot Program</h3>
+      <p>Takes 30 seconds. Our founding team calls back within 2 hours to confirm your limited free trial.</p>
+      
+      <div class="pf-fields-wrap">
+        <div class="pf-grid-row">
+          <input class="form-input-vets" id="pf_clinic" type="text" placeholder="Clinic Name *" required/>
+          <input class="form-input-vets" id="pf_doctor" type="text" placeholder="Doctor's Full Name *" required/>
+        </div>
+        <div class="pf-grid-row">
+          <input class="form-input-vets" id="pf_phone" type="tel" placeholder="WhatsApp / Phone *" inputmode="numeric" required/>
+          <input class="form-input-vets" id="pf_area" type="text" placeholder="Clinic Area / Location *" required/>
+        </div>
+        <div>
+          <select class="form-select-vets" id="pf_size" required>
+            <option value="" disabled selected>Practice Size *</option>
+            <option value="Solo Practice (1 vet)">Solo Practice (1 vet)</option>
+            <option value="Small Clinic (2–3 vets)">Small Clinic (2–3 vets)</option>
+            <option value="Multi-vet Hospital">Multi-vet Hospital</option>
+          </select>
+        </div>
+        <button class="btn-form-submit" onclick="submitPartnerForm()">
+          Request a Callback →
+        </button>
+      </div>
+    </div>
+    
+    <div class="form-success-card" id="pfSuccess">
+      <div class="form-success-icon">🎉</div>
+      <h4>Application Received!</h4>
+      <p>We've successfully received your details. Our founding team will contact you within 2 hours to set up your limited trial!</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="favicon-192.png" alt="Logo" id="footer-img" />
+        <span class="footer-logo-text">The Good Vets</span>
+      </div>
+      <p>India's most trusted preventive pet healthcare subscription service. Because your pet's health shouldn't depend on memory.</p>
+      <span class="footer-tagline">Love · Care · Prevent</span>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul class="footer-links">
+        <li><a href="index.html#how">How It Works</a></li>
+        <li><a href="index.html#services">Our Services</a></li>
+        <li><a href="register.html">Register Your Pet</a></li>
+        <li><a href="index.html#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/919675406277" target="_blank">WhatsApp Us</a></li>
+       
+        <li><a href="tel:+919675406277">Call Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul class="footer-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="terms.html#refund">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 The Good Vets. All rights reserved. Moradabad, India.</span>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ── SCRIPTS ── -->
+<script>
+function toggleRegMenu() {
+  var menu = document.getElementById('regMobileMenu');
+  var backdrop = document.getElementById('regBackdrop');
+  var btn = document.getElementById('regHamburger');
+  var isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open'); backdrop.classList.remove('open');
+    btn.classList.remove('open'); document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open'); backdrop.classList.add('open');
+    btn.classList.add('open'); document.body.style.overflow = 'hidden';
+  }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var m = document.getElementById('regMobileMenu');
+    if (m && m.classList.contains('open')) toggleRegMenu();
+  }
+});
+
+/* Form submission action */
+function submitPartnerForm() {
+  var clinic  = document.getElementById('pf_clinic').value.trim();
+  var doctor  = document.getElementById('pf_doctor').value.trim();
+  var phone   = document.getElementById('pf_phone').value.trim();
+  var area    = document.getElementById('pf_area').value.trim();
+  var size    = document.getElementById('pf_size').value;
+
+  if (!clinic || !doctor || !phone || !area || !size) {
+    [document.getElementById('pf_clinic'), document.getElementById('pf_doctor'),
+     document.getElementById('pf_phone'),  document.getElementById('pf_area'),
+     document.getElementById('pf_size')].forEach(function(el) {
+      if (!el.value.trim()) {
+        el.style.borderColor = 'rgba(220,38,38,0.5)';
+        el.style.boxShadow   = '0 0 0 3px rgba(220,38,38,0.1)';
+        setTimeout(function() { el.style.borderColor=''; el.style.boxShadow=''; }, 2000);
+      }
+    });
+    return;
+  }
+
+  var btn  = document.querySelector('.btn-form-submit');
+  btn.disabled = true;
+  btn.textContent = 'Submitting Details...';
+
+  var msg = 'Hi The Good Vets! I want to join the Clinic Pilot Program.%0A%0A'
+    + '*Clinic Name:* ' + encodeURIComponent(clinic) + '%0A'
+    + '*Doctor Name:* ' + encodeURIComponent(doctor) + '%0A'
+    + '*WhatsApp/Phone:* '  + encodeURIComponent(phone)  + '%0A'
+    + '*Area/Location:* '   + encodeURIComponent(area)   + '%0A'
+    + '*Practice Size:* '   + encodeURIComponent(size);
+
+  setTimeout(function() {
+    document.getElementById('pfFormFields').style.display = 'none';
+    document.getElementById('pfSuccess').classList.add('visible');
+    /* Open WhatsApp with callback context */
+    window.open('https://wa.me/919675406277?text=' + msg, '_blank');
+  }, 1000);
+}
+</script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0a4a7dfdc4fa6f9',t:'MTc4MTIyMzI3MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0a4db3f7f63baaa',t:'MTc4MTIyNTM3NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0c7a48fbfb4a79d',t:'MTc4MTU5MDEzNg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
